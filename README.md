@@ -28,3 +28,28 @@ Usage
  2. Browse to http://localhost (or whatever)
 
 
+Directory Structure
+===================
+
+	|
+    ├── frontend_src - Code that will be compiled into /public.
+    |                  Create new frontend js/less/etc here.
+    |
+    ├── node_modules - Box of magic. Do not touch or git.
+    |
+    ├── public - Files directly accessable to client via HTTP
+    |    |
+    |    ├── bower_components - Publicly available magic. 
+    |    |                      Do not touch, DO git.
+    |    |
+    |    └── js - js files end up here. You probably don't want 
+    |             to create files here directly.
+    |
+    ├── Gruntfile.js - Configure how project is compiled
+    |
+    ├── bower.json - Manages frontend dependencies which are 
+    |                installed using Bower.
+    |
+    ├── package.json - Manages server-side (node/npm) dependencies.
+    |
+  	└── server.js - The "go" button.

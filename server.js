@@ -1,22 +1,13 @@
- var express = require('express'),
-     app = express(),
-     http = require('http'),
-     server = http.createServer(app),
-     io = require('socket.io').listen(server),
-     ent = require('ent'),
-     fs = require('fs');
-
+var express = require('express'),
+    app = express(),
+    http = require('http'),
+    server = http.createServer(app),
+    ent = require('ent'),
+    fs = require('fs')
+    surly = require('./src/surly.js');
 
 server.listen(8080, "0.0.0.0");
 
-app.use(express.static(__dirname + '/www'));
+console.log(surly.talk('hi'));
 
-io.sockets.on('connection', function(socket) {
-
-	socket.on('say', function(edit) {
-		console.log('SAY called.');
-
-		socket.broadcast.emit('respond', edit);
-	})
-
-});
+app.use(express.static(__dirname + '/public'));
