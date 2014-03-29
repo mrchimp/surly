@@ -1,0 +1,33 @@
+{
+	"name": "primoid",
+	"desctiption": "node.js AIML interpretter",
+	"version" : "0.1.0",
+	"license": "GPL-3.0",
+	"keyword": [
+		"chatbot",
+		"aiml"
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mrchimp/primoid"
+	},
+	"scripts": {
+		"start": "node server.js"
+	},
+	"dependencies": {
+		"express": "",
+		"socket.io": "",
+		"ent": "~0.1.0"
+	},
+	"bugs": {
+		"url": "http://github.com/mrchimp/primoid/issues",
+		"email": "primoidbugs@deviouschimp.co.uk"
+	},
+	"contributors": [
+		{
+			"name": "Jake Gully",
+			"email": "chimpytk@gmail.com",
+			"url": "http://deviouschimp.co.uk"
+		}
+	]
+}
