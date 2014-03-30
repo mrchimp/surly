@@ -8,6 +8,12 @@ surly
 Surly is a node.js AIML interpreter.
 
 
+Project Status
+==============
+
+Doesn't fucking work.
+
+
 Requirements
 ============
 
@@ -57,8 +63,7 @@ Directory Structure
     |
     ├── Gruntfile.js - Configure how project is compiled
     |
-    ├── bower.json - Manages frontend dependencies which are 
-    |                installed using Bower.
+    ├── bower.json - Manage frontend dependencies
     |
     ├── package.json - Manages server-side (node/npm) dependencies.
     |
