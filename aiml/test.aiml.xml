@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<aiml version="1.0">
+  <category>
+    <pattern>WHAT IS YOUR NAME?</pattern>
+    <template>
+      <random>
+        <li>My name is Surly!</li>
+        <li>I am the almighty Surly!</li>
+      </random>
+    </template>
+  </category>
+  
+  <category>
+    <pattern>WHAT'S YOUR NAME?</pattern>
+    <template><srai>WHAT IS YOUR NAME?</srai></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS *</pattern>
+    <template>I don't know.</template>
+  </category>
+</aiml>

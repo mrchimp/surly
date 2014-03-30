@@ -1,7 +1,11 @@
 surly
 =====
 
-Node.js AIML interpretter
+ > **surly** *adjective*
+ > 
+ >  1. bad-tempered and unfriendly
+
+Surly is a node.js AIML interpreter.
 
 
 Requirements
@@ -15,27 +19,29 @@ Requirements
 Installation
 ============
 
- 1. Clone the repo
- 2. `$ npm install`
- 3. `$ bower install`
- 4. `$ grunt`
+ 1. Aquire code.
+ 2. `npm install`
+ 3. `bower install`
+ 4. `grunt`
 
 
 Usage
 =====
 
  1. `$ sudo node server.js`
- 2. Browse to http://localhost (or whatever)
+ 2. Obey on-screen instructions.
 
 
 Directory Structure
 ===================
 
+    |
+    ├── aiml - This is where the bot's brain goes.
 	|
     ├── frontend_src - Code that will be compiled into /public.
     |                  Create new frontend js/less/etc here.
     |
-    ├── node_modules - Box of magic. Do not touch or git.
+    ├── node_modules - Box of magic. Do not touch. Do not git.
     |
     ├── public - Files directly accessable to client via HTTP
     |    |
@@ -44,6 +50,10 @@ Directory Structure
     |    |
     |    └── js - js files end up here. You probably don't want 
     |             to create files here directly.
+    |
+    ├── routes - Map URLs to functions
+    |
+    ├── views - Template file - [EJS format](http://embeddedjs.com/)
     |
     ├── Gruntfile.js - Configure how project is compiled
     |
