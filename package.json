@@ -1,43 +1,44 @@
 {
-	"name": "primoid",
-	"desctiption": "node.js AIML interpretter",
-	"version" : "0.1.0",
-	"license": "GPL-3.0",
-	"keyword": [
-		"chatbot",
-		"aiml"
-	],
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/mrchimp/primoid"
-	},
-	"scripts": {
-		"start": "node server.js"
-	},
-	"dependencies": {
-		"express": "",
-		"socket.io": "",
-		"ent": "~0.1.0",
-		"ejs": "*"
-	},
-	"devDependencies": {
-		"bower": "",
-	    "grunt": "~0.4.1",
-	    "grunt-contrib-concat": "~0.3.0",
-	    "grunt-contrib-uglify": "~0.2.2",
-	    "grunt-contrib-less": "~0.9.0",
-	    "grunt-contrib-watch": "~0.4.0",
-	    "grunt-focus": "~0.1.1"
-	},
-	"bugs": {
-		"url": "http://github.com/mrchimp/primoid/issues",
-		"email": "primoidbugs@deviouschimp.co.uk"
-	},
-	"contributors": [
-		{
-			"name": "Jake Gully",
-			"email": "chimpytk@gmail.com",
-			"url": "http://deviouschimp.co.uk"
-		}
-	]
+  "name": "surly",
+  "desctiption": "node.js AIML interpretter",
+  "version": "0.1.0",
+  "license": "GPL-3.0",
+  "keyword": [
+    "chatbot",
+    "aiml"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mrchimp/surly"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "",
+    "socket.io": "",
+    "ent": "~0.1.0",
+    "ejs": "*",
+    "xml2js": "~0.4.2"
+  },
+  "devDependencies": {
+    "bower": "",
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-contrib-less": "~0.9.0",
+    "grunt-contrib-watch": "~0.4.0",
+    "grunt-focus": "~0.1.1"
+  },
+  "bugs": {
+    "url": "http://github.com/mrchimp/surly/issues",
+    "email": "primoidbugs@deviouschimp.co.uk"
+  },
+  "contributors": [
+    {
+      "name": "Jake Gully",
+      "email": "chimpytk@gmail.com",
+      "url": "http://deviouschimp.co.uk"
+    }
+  ]
 }

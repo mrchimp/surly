@@ -7,10 +7,12 @@ $('#mouth').on('submit', function (e) {
 		url: '/talk',
 		type: 'POST',
 		dataType: 'json',
+		data: {
+			sentence: sentence
+		},
 		success: function (data) {
-			$('#conversation').append('<br>You: "' + $('#speech_input').val() + '"');
-			test = data;
-			$('#conversation').append('<br>Surly: "' + data.response + '"');
+			$('#conversation').append('<br><strong>You</strong>: ' + $('#speech_input').val());
+			$('#conversation').append('<br><strong>Surly</strong>: ' + data.response);
 			$('#speech_input').val('');
 		},
 		error: function (a,b,c) {
