@@ -37,11 +37,10 @@ app.post('/talk', talk.index); // Gets a response (JSON)
 app.use(express.static(__dirname + '/public'));
 
 var interpreter = new surly;
-interpreter.loadAimlDir(aimlDir, function() {
-	console.log('AIML files are loaded.');
-	console.log('You: What is your name?');
-	console.log('Surly: ' + interpreter.talk('What is your name?'));
-});
+interpreter.loadAimlDir(aimlDir);
+
+console.log('You: What is your name?');
+console.log('Surly: ' + interpreter.talk('What is your name?'));
 
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Surly server\'s listening on port fucking ' + app.get('port') + ', alright?');

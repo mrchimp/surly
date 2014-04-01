@@ -1,5 +1,5 @@
 var fs = require('fs');
-var parseXml = require('xml2js').parseString;
+var xmlParser = require('xmldom').DOMParser;
 
 var Surly = function() {
 
@@ -9,6 +9,7 @@ var Surly = function() {
 
 	var commands = {
 		help: function (sentence) {
+			console.log('HELP!');
 			return 'This is the unhelpful help. Type "/cmds" to list available commands.';
 		},
 		cmds: function () {
@@ -19,7 +20,7 @@ var Surly = function() {
 				keys.push(key);
 			}
 
-			return 'Available commands: ' + keys.join(', ') + '.';
+			return 'Available commands: /' + keys.join(', /') + '.';
 		}
 	};
 
@@ -44,14 +45,18 @@ var Surly = function() {
 				return console.log(err);
 			}
 
-			parseXml(xml, function (err, result) {
-				if (err) {
-					callback(err);
-					return;
-				}
-				aimlDom.push(result);
-				callback(err);
-			});
+			console.log('Parsing AIML files...');
+			aimlDom.push(new DOMParser.parseFromString(xml));
+			console.log('Files parsed!');
+
+			// function (err, result) {
+			// 	if (err) {
+			// 		callback(err);
+			// 		return;
+			// 	}
+			// 	aimlDom.push(result);
+			// 	callback(err);
+			// });
 		});
 	};
 
@@ -117,8 +122,7 @@ var Surly = function() {
 	this.findCategory = function (sentence, categories) {
 		for (var i = 0; i < categories.length; i++) {
 			if (categories[i].name === 'category') {
-
-
+				console.log('ping');
 			}
 		}
 	}
