@@ -1,5 +1,5 @@
 var fs = require('fs');
-var xmlParser = require('xmldom').DOMParser;
+var DOMParser = require('xmldom').DOMParser;
 
 var Surly = function() {
 
@@ -24,6 +24,10 @@ var Surly = function() {
 		}
 	};
 
+	this.debug = function (msg) {
+		console.log('    -- ' + msg);
+	};
+
 	/**
 	 * Unload all data from the AIML DOM
 	 * @return undefined
@@ -38,16 +42,18 @@ var Surly = function() {
 	 * @return {Undefined}
 	 */
 	this.loadAimlFile = function (file, callback) {
-		console.log('Loading file "' + file + '"...');
+
+		var that = this;
+
+		this.debug('Loading file "' + file + '"...');
 
 		fs.readFile(file, 'utf8', function (err, xml) {
 			if (err) {
 				return console.log(err);
 			}
 
-			console.log('Parsing AIML files...');
-			aimlDom.push(new DOMParser.parseFromString(xml));
-			console.log('Files parsed!');
+			aimlDom.push(new DOMParser().parseFromString(xml));
+			that.debug('Files parsed!');
 
 			// function (err, result) {
 			// 	if (err) {
@@ -88,6 +94,10 @@ var Surly = function() {
 	 * @return {String}
 	 */
 	this.talk = function(sentence) {
+		this.debug('User: ' + sentence);
+
+		sentence = sentence.toUpperCase();
+
 		// Sentences beginning with / are commands
 		if (sentence.substr(0,1) === '/') {
 			return commands[sentence.substr(1).split(' ')[0]](sentence);
@@ -98,12 +108,22 @@ var Surly = function() {
 			return 'My mind is blank.';
 		}
 
+		var findPattern = function (categories) {
+			var categories = aimlDom[0].getElementsByTagName('category'); // @todo - more than 0
+
+			for (var i = 0; i < categories.length; i++) {
+				this.debug('cat loop: '+i);
+				this.debug(categories[i].childNodes);
+				text = categories[i].childNodes;
+			}
+		}
+
 		sentence = sentence.toUpperCase();
 		
 		var response = '';
 
 		for (var i = 0; i < aimlDom.length; i++) {
-			response = this.findCategory(sentence, aimlDom[i]);
+			response = this.findCategory(sentence, aimlDom[i].getElementsByTagName('category'));
 			if (response) {
 				break;
 			}
@@ -121,11 +141,22 @@ var Surly = function() {
 
 	this.findCategory = function (sentence, categories) {
 		for (var i = 0; i < categories.length; i++) {
-			if (categories[i].name === 'category') {
-				console.log('ping');
+			var pattern = categories[i].getElementsByTagName('pattern')[0].childNodes[0].data;
+
+			if (this.comparePattern(pattern, sentence)) {
+				// @todo - loads of stuff
+				
+				this.debug(categories[i].getElementsByTagName('template')[0].childNodes[0].data);
+
+				return categories[i].getElementsByTagName('template')[0].childNodes[0].data;
 			}
 		}
-	}
+	};
+
+	this.comparePattern = function (pattern, sentence) {
+		// @todo: make this intelligent
+		return pattern === sentence;
+	};
 }
 
 module.exports = Surly;
