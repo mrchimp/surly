@@ -33,11 +33,13 @@ if ('development' == app.get('env')) {
 interpreter = new surly();
 interpreter.loadAimlDir(aimlDir);
 
-app.get('/', routes.index); // Gets the form
+// Set up routes
+app.get('/', routes.index);    // Gets the form
 app.post('/talk', talk.index); // Gets a response (JSON)
 
+// Set up static files dir
 app.use(express.static(__dirname + '/public'));
 
 http.createServer(app).listen(app.get('port'), function(){
-    console.log('Surly server\'s listening on port fucking ' + app.get('port') + ', alright?');
+    console.log('Surly server\'s listening on port fucking ' + app.get('port') + ', alright? Go to http://localhost:3000 to have a chat.');
 });

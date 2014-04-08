@@ -11,7 +11,7 @@ Surly is a node.js AIML interpreter.
 Project Status
 ==============
 
-Doesn't fucking work.
+Kind of works a bit.
 
 
 Requirements
@@ -34,8 +34,16 @@ Installation
 Usage
 =====
 
+Run a web server
+----------------
+
  1. `$ sudo node server.js`
  2. Obey on-screen instructions.
+
+Use in the terminal
+-------------------
+
+ 1. `$ node cli.js`
 
 
 Directory Structure
