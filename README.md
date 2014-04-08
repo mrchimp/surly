@@ -19,7 +19,6 @@ Requirements
 
  * [Node.js](http://nodejs.org/)
  * [NPM](https://www.npmjs.org/)
- * [Grunt](http://gruntjs.com/)
 
 
 Installation
