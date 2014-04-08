@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<aiml>
+
+  <category>
+    <pattern>TEST</pattern>
+    <template>Success!</template>
+  </category>
+  
+  <category>
+    <pattern>RANDOM</pattern>
+    <template>
+      <random>
+        <li>badger</li>
+        <li>shenanigans</li>
+        <li>perriwinkle</li>
+        <li>slalom</li>
+        <li>schnapps</li>
+      </random>
+    </template>
+  </category>
+  
+  <category>
+      <pattern>WHY</pattern>
+      <that>BECAUSE.</that>
+      <template>I don't have all the answers.</template>
+  </category>
+  
+  <category>
+      <pattern>WHY</pattern>
+      <template>Because.</template>
+  </category>
+
+  <category>
+      <pattern>MY NAME IS *</pattern>
+      <template>Hello, <star /><set name="name"><star /></set></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS YOUR NAME?</pattern>
+    <template>My name is <bot name="name" />.</template>
+  </category>
+
+
+  <category>
+    <pattern>WHAT IS MY NAME?</pattern>
+    <template>You are <get name="name" />.</template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS THAT?</pattern>
+    <template><that /></template>
+  </category>
+
+  <category>
+    <pattern>WHAT IS *</pattern>
+    <template>I don't know what <star /> is.</template>
+  </category>
+
+  <category>
+    <pattern>SET FOO BAR</pattern>
+    <template>Foo has been set to "bar". <set name="foo">bar</set></template>
+  </category>
+
+  <category>
+    <pattern>SET FOO *</pattern>
+    <template>Foo has been set to <star /><set name="foo"><star /></set></template>
+  </category>
+
+  <category>
+    <pattern>GET FOO</pattern>
+    <template>Foo is: <get name="foo"></get></template>
+  </category>
+
+  <category>
+    <pattern>URL</pattern>
+    <template>My website is <bot name="website" /></template>
+  </category>
+</aiml>

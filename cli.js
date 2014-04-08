@@ -6,6 +6,7 @@ var sentence = '';
 var interpreter = new surly();
 var aimlDir = __dirname + '/aiml';
 
+// interpreter.loadAimlFile(__dirname + '/aiml/0000test.aiml');
 interpreter.loadAimlDir(aimlDir);
 
 console.log('Type something. Type quit to quit.');

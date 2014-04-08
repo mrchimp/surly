@@ -19,8 +19,7 @@
     "socket.io": "",
     "ent": "~0.1.0",
     "ejs": "*",
-    "xml2js": "~0.4.2",
-    "xmldom": "~0.1.19"
+    "libxmljs": "~0.8.1"
   },
   "devDependencies": {
     "bower": "",

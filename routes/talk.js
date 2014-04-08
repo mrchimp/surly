@@ -1,13 +1,8 @@
-
-var surly = require('../src/surly.js');
-
 /*
- * GET users listing.
+ * GET JSON Surly response
  */
 
 exports.index = function(req, res){
-	var interpreter = new surly;
-
 	var	output = {
 		response: interpreter.talk(req.body.sentence)
 	};

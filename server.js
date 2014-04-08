@@ -23,7 +23,6 @@ app.use(express.cookieParser('your secret here'));
 app.use(express.session());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(express.urlencoded());
 
 // development only
@@ -31,18 +30,14 @@ if ('development' == app.get('env')) {
     app.use(express.errorHandler());
 }
 
+interpreter = new surly();
+interpreter.loadAimlDir(aimlDir);
+
 app.get('/', routes.index); // Gets the form
 app.post('/talk', talk.index); // Gets a response (JSON)
 
 app.use(express.static(__dirname + '/public'));
 
-var interpreter = new surly;
-interpreter.loadAimlDir(aimlDir);
-
-console.log('You: What is your name?');
-console.log('Surly: ' + interpreter.talk('What is your name?'));
-
 http.createServer(app).listen(app.get('port'), function(){
     console.log('Surly server\'s listening on port fucking ' + app.get('port') + ', alright?');
-    console.log('Surly: ' + interpreter.talk('bootmsg'));
 });
