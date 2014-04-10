@@ -274,6 +274,9 @@ var Surly = function() {
 				case 'a': // link tag - return as text
 					output += templateChildren[i].toString();
 					break;
+				case 'br':
+					output += '<br>';
+					break;
 				// case 'srai':
 				// 	var srai = templateChildren[i].text().toUpperCase();
 
