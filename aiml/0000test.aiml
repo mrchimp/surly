@@ -12,6 +12,11 @@
   </category>
 
   <category>
+    <pattern>WHAT IS THE DATE</pattern>
+    <template><srai>DATE</srai></template>
+  </category>
+
+  <category>
     <pattern>TEST</pattern>
     <template>Success!</template>
   </category>
