@@ -93,7 +93,7 @@ var Surly = function() {
 	var unknownVariableString = 'unknown';
 
 	// Data stored by the client using <set> tags
-	var storedVariables = [];
+	var storedVariables = {};
 
 	// Special cmomands
 	var commands = {
@@ -112,6 +112,12 @@ var Surly = function() {
 			return 'Available commands: /' + keys.join(', /') + '.';
 		}
 	};
+
+	var inventory = [
+		'The beat',
+		'A blueberry muffin',
+		'Sweden'
+	];
 
 	var logger = new Logger('logs/surly.log');
 
@@ -189,14 +195,19 @@ var Surly = function() {
 	 * @return {String}
 	 */
 	this.talk = function(sentence) {
+		var i,
+			template,
+			command = '',
+			response = '';
+
 		this.debug('========================');
 		this.debug('User input: ' + sentence);
 
-		sentence = sentence.toUpperCase();
+		sentence = sentence;
 
 		// Sentences beginning with / are commands
 		if (sentence.substr(0,1) === '/') {
-			var command = sentence.substr(1).split(' ')[0];
+			command = sentence.substr(1).split(' ')[0];
 
 			this.debug('Command: ' + command);
 
@@ -212,12 +223,7 @@ var Surly = function() {
 			return 'My mind is blank.';
 		}
 
-		sentence = sentence.toUpperCase();
-		
-		var template,
-			response = '';
-
-		for (var i = 0; i < aimlDom.length; i++) {
+		for (i = 0; i < aimlDom.length; i++) {
  			template = this.findTemplate(sentence, aimlDom[i].find('category'));
 
 			if (template) {
@@ -247,7 +253,7 @@ var Surly = function() {
 		this.debug('Using template: ' + template.toString());
 
 		var output = '',
-			templateChildren = template.childNodes();
+			children = template.childNodes();
 
 		// @todo - issues here. recursion isn't quite right...
 		// if (typeof template === 'undefined') {
@@ -255,57 +261,56 @@ var Surly = function() {
 		// 	return false;
 		// }
 		// 
-		// if (!templateChildren.length) {
+		// if (!children.length) {
 		// 	this.debug('Empty template');
 		// 	return false;
 		// }
 
-		for (var i = 0; i < templateChildren.length; i++) {	
+		for (var i = 0; i < children.length; i++) {	
 			this.debug('======== NODE ======== ');
-			this.debug(templateChildren[i].name());
-			this.debug('string: ' + templateChildren[i].toString());
+			this.debug(children[i].name());
+			this.debug('string: ' + children[i].toString());
 
-			switch (templateChildren[i].name()) {
+			switch (children[i].name()) {
 				case 'template':
-					output += this.getTemplateText(templateChildren[i]);
+					output += this.getTemplateText(children[i]);
 					break;
 				case 'text':
-					if (templateChildren[i].text().trim() !== '') {
-						output += this.handleString(templateChildren[i]);
+					if (children[i].text().trim() !== '') {
+						output += this.handleString(children[i]);
 					}
 
 					break;
 				case 'a': // link tag - return as text
-					output += templateChildren[i].toString();
+					output += children[i].toString();
 					break;
 				case 'br':
 					output += '<br>';
 					break;
-				// case 'srai':
-				// 	var srai = templateChildren[i].text().toUpperCase();
-
-				// 	break;
+				case 'srai':
+					output += this.talk(this.getTemplateText(children[i]));
+					break;
 				case 'random':
-					var childrenOfRandom = templateChildren[i].find('li');
+					var childrenOfRandom = children[i].find('li');
 					var rand = Math.floor(Math.random() * childrenOfRandom.length);
 					var randomElement = childrenOfRandom[rand];
 
 					output += this.getTemplateText(randomElement);
 					break;
 				case 'bot':
-					output += this.getBotAttribute(templateChildren[i].attr('name').value());
+					output += this.getBotAttribute(children[i].attr('name').value());
 					break;
 				case 'get':
-					output += (this.getStoredVariable(templateChildren[i].attr('name').value()) || unknownVariableString);
+					output += (this.getStoredVariable(children[i].attr('name').value()) || children[i].attr('default').value() || unknownVariableString);
 					break;
 				case 'set':
-					this.setStoredVariable(templateChildren[i].attr('name').value(), this.getTemplateText(templateChildren[i]));
+					this.setStoredVariable(children[i].attr('name').value(), this.getTemplateText(children[i]));
 					break;
 				case 'star':
 					var index = 0;
 
-					if (templateChildren[i].attr('index')) {
-						index = templateChildren[i].attr('index').value();
+					if (children[i].attr('index')) {
+						index = children[i].attr('index').value();
 					}
 
 					if (typeof wildCardValues[index] === 'undefined') {
@@ -319,19 +324,40 @@ var Surly = function() {
 				// case 'sr':
 				// 	output  += 
 				// 	break;
+				case 'inventory':
+					var action = children[i].attr('action').value();
+
+					switch (action) {
+						case 'swap':
+							if (inventory.length > 0) {
+								this.setStoredVariable('last_dropped', inventory.shift());
+							}
+							inventory.push(this.getTemplateText(children[i]));
+							break;
+						case 'list':
+							output += 'I am carrying ' + inventory.join(', ') + '. ';
+							break;
+						default:
+							this.debug('Invalid inventory action: ' + action);
+					}
+					break;
 				case 'that':
 					output += previousResponse;
 					break;
 				case 'li':
-					output += this.getTemplateText(templateChildren[i]);
+					output += this.getTemplateText(children[i]);
 					break;
 				// case 'pattern':
 				case 'person':
 					output += 'Dude';
 					break;
+				case 'think':
+					// Parse template but don't output results
+					this.getTemplateText(children[i]); 
+					break;
 				default:
-					//return resolveChildren(templateChildren);
-					output += ' [' + templateChildren[i].name() + ' not implemented] ';
+					//return resolveChildren(children);
+					output += ' [' + children[i].name() + ' not implemented] ';
 					break;
 			}
 		}
@@ -436,7 +462,7 @@ var Surly = function() {
 		}
 
 		// @todo - this needs to be fuzzier
-		var isMatch = this.comparePattern(that[0].text().toUpperCase(), previousResponse.toUpperCase());
+		var isMatch = this.comparePattern(that[0].text(), previousResponse);
 
 		return isMatch;
 	}
@@ -447,9 +473,8 @@ var Surly = function() {
 	 * @param  {String} pattern  AIML pattern
 	 * @return {Boolean}         True if sentence matches pattern
 	 */
-	this.comparePattern = function (sentence, pattern) {
+	this.comparePattern = function (sentence, aiml_pattern) {
 		// @todo
-		
 		// add spaces to prevent false positives
 		if (sentence.charAt(0) !== ' ') {
 			sentence = ' ' + sentence;
@@ -459,12 +484,13 @@ var Surly = function() {
 			sentence = sentence + ' ';
 		}
 
-		var regexPattern = this.aimlPatternToRegex(pattern);
-		var matches = sentence.match(regexPattern);
+		sentence = sentence.toUpperCase(); // @todo - remove this
 
-		if (matches && (matches[0].length >= sentence.length || regexPattern.indexOf(this.wildCardRegex) > -1)) {
-			wildCardValues = [];
-			wildCardValues = this.getWildCardValues(sentence, pattern);
+		var regex_pattern = this.aimlPatternToRegex(aiml_pattern);
+		var matches = sentence.match(regex_pattern);
+
+		if (matches && (matches[0].length >= sentence.length || regex_pattern.indexOf(this.wildCardRegex) > -1)) {
+			wildCardValues = this.getWildCardValues(sentence, aiml_pattern);
 			return true;
 		}
 		
@@ -473,32 +499,31 @@ var Surly = function() {
 
 	/**
 	 * Convert a string with wildcards (*s) to regex
-	 * @param  String text The string with wildcards
+	 * @param  String pattern The string with wildcards
 	 * @return String      The altered string
 	 */
-	this.aimlPatternToRegex = function (text) {
-
+	this.aimlPatternToRegex = function (pattern) {
 		var lastChar,
-		    firstChar = text.charAt(0);
+		    firstChar = pattern.charAt(0);
 
 		// add spaces to prevent e.g. foo matching food
 		if (firstChar != '*') {
-			text = ' ' + text;
+			pattern = ' ' + pattern;
 		}
 
-		lastCharIsStar = text.charAt(text.length - 1) === '*';
+		lastCharIsStar = pattern.charAt(pattern.length - 1) === '*';
 
 		// remove spaces before *s
-		text = text.replace(' *', '*');
+		pattern = pattern.replace(' *', '*');
 
 		// replace wildcards with regex
-		text = text.replace(/\*/g, wildCardRegex);
+		pattern = pattern.replace(/\*/g, wildCardRegex);
 
 		if (!lastCharIsStar) {
-			text = text + '[\\s|?|!|.]*';
+			pattern = pattern + '[\\s|?|!|.]*';
 		}
 
-		return text;
+		return pattern;
 	};
 
 	/**

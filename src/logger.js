@@ -3,8 +3,7 @@ var fs = require('fs');
 
 
 /**
- * Simple logging system. Logs data to end of given
- * text file, archives files above a given size.
+ * Simple logging system.
  * @param {String} logfile Path to log file.
  */
 var Logger = function (logfile) {

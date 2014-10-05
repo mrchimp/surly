@@ -36,10 +36,14 @@
   </category>
 
   <category>
+      <pattern>WHAT'S *</pattern>
+      <template><srai>WHAT IS <star /></srai></template>
+  </category>
+
+  <category>
     <pattern>WHAT IS YOUR NAME?</pattern>
     <template>My name is <bot name="name" />.</template>
   </category>
-
 
   <category>
     <pattern>WHAT IS MY NAME?</pattern>
@@ -74,5 +78,20 @@
   <category>
     <pattern>URL</pattern>
     <template>My website is <bot name="website" /></template>
+  </category>
+
+  <category>
+    <pattern>TAKE *</pattern>
+    <template>
+      <think>
+        <inventory action="swap"><star /></inventory>
+      </think>
+      Okay, took <star /> and dropped <get name="last_dropped" default="nothing"></get>
+    </template>
+  </category>
+
+  <category>
+    <pattern>INVENTORY</pattern>
+    <template><inventory action="list" /></template>
   </category>
 </aiml>

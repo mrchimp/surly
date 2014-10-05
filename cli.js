@@ -7,11 +7,14 @@ var stdin = process.openStdin();
 var sentence = '';
 var interpreter = new surly();
 var aimlDir = __dirname + '/aiml';
+var prompt = 'You: ';
 
 // interpreter.loadAimlFile(__dirname + '/aiml/0000test.aiml');
 interpreter.loadAimlDir(aimlDir);
 
-console.log('## Type something. Type quit to quit. /help for help.##');
+console.log('Surly: Hello! Type quit to quit or /help for unhelpful help.');
+
+process.stdout.write(prompt);
 
 stdin.addListener('data', function (d) {
 	var sentence = d.toString().substring(0, d.length - 1)
@@ -21,5 +24,6 @@ stdin.addListener('data', function (d) {
 		process.exit(0);
 	}
 
-	console.log('Surly: ' + interpreter.talk(sentence));
+	console.log('Surly: ' + interpreter.talk(sentence).trim());
+	process.stdout.write(prompt);
 });
