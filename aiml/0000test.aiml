@@ -23,21 +23,21 @@
       </random>
     </template>
   </category>
-  
+
   <category>
     <pattern>I LIKE *</pattern>
     <template>Yeah, <star /> is alright, I guess.</template>
   </category>
 
   <category>
-    <pattern>REPEAT *</pattern>
-    <template>You just said "<input index="1" />".</template>
-  </category>
-
-  <category>
     <pattern>DO YOU?</pattern>
     <that>YEAH, * IS ALRIGHT, I GUESS.</that>
     <template>No, <thatstar /> sucks.</template>
+  </category>
+  
+  <category>
+    <pattern>REPEAT *</pattern>
+    <template>You just said "<input index="1" />".</template>
   </category>
 
   <category>

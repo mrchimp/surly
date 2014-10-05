@@ -1,4 +1,6 @@
 
+I'm aiming to cover AIML 1.0.1, plus some additional custom tags.
+
 
 AIML Coverage
 =============
@@ -17,7 +19,7 @@ AIML Coverage
   * ✔ Get
   * ✔ Bot
 * Shortcuts
-  * ✘ Sr
+  * ✔ Sr
   * ✘ Person
   * ✘ Person2
   * ✘ Gender
@@ -53,4 +55,4 @@ Won't Implement
 ===============
 
   * ✘ Javascript (this will NOT be implemented)
-
+  * ✘ Deprecated tags (personf, etc.)

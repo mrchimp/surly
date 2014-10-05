@@ -322,7 +322,7 @@ var Surly = function() {
 
 					break;
 				case 'sr':
-					output += this.talk(wildcard_stack.getLast[0]);
+					output += this.talk(wildcard_stack.getLast()[0]);
 					break;
 				case 'inventory':
 					var action = children[i].attr('action').value();

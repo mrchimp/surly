@@ -82,4 +82,8 @@ Things Surly should be able to reply to (an inconclusive list)
 
  * "What is NOUN?"
 
- 
+
+Todo
+====
+
+Proper input normalization: http://www.alicebot.org/TR/2001/WD-aiml/#section-input-normalization
