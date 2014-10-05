@@ -38,13 +38,13 @@ AIML Coverage
   * ✔ Set
   * ✘ Gossip
 * Symbolic Reduction
-  * ✘ SRAI
+  * ✔ SRAI
 * Transformationasl
   * ✘ Person
   * ✘ Person2
   * ✘ Gender
 * Covert
-  * ✘ Think
+  * ✔ Think
   * ✘ Learn
 * External Processor
   * ✘ System

@@ -321,9 +321,9 @@ var Surly = function() {
 					}
 
 					break;
-				// case 'sr':
-				// 	output  += 
-				// 	break;
+				case 'sr':
+					output += this.talk(wildCardValues[0]);
+					break;
 				case 'inventory':
 					var action = children[i].attr('action').value();
 
@@ -462,7 +462,7 @@ var Surly = function() {
 		}
 
 		// @todo - this needs to be fuzzier
-		var isMatch = this.comparePattern(that[0].text(), previousResponse);
+		var isMatch = this.comparePattern(that[0].text(), previousResponse.toUpperCase());
 
 		return isMatch;
 	}

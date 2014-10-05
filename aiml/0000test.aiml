@@ -20,6 +20,11 @@
   </category>
   
   <category>
+    <pattern>SR *</pattern>
+    <template><sr /></template>
+  </category>
+
+  <category>
       <pattern>WHY</pattern>
       <that>BECAUSE.</that>
       <template>I don't have all the answers.</template>
