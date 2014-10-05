@@ -12,6 +12,11 @@
   </category>
 
   <category>
+    <pattern>PERSON *</pattern>
+    <template><person><star /></person></template>
+  </category>
+
+  <category>
     <pattern>SIZE</pattern>
     <template>I recognize <size /> sentences.</template>
   </category>

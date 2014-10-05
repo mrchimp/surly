@@ -2,6 +2,7 @@ var fs = require('fs');
 var libxmljs = require('libxmljs');
 var Logger = require('./logger');
 var Stack = require('./stack');
+var subs = require('./substitutions');
 var pkg = require('../package.json');
 
 var Surly = function() {
@@ -176,7 +177,8 @@ var Surly = function() {
 		var i,
 			template,
 			command = '',
-			response = '';
+			response = '',
+			start_time = new Date();
 
 		this.log('INPUT: ' + sentence);
 
@@ -218,7 +220,9 @@ var Surly = function() {
 
 		previousResponse = this.normaliseTemplate(template);
 
-		this.log('OUTPUT: ' + response);
+		var end_time = new Date();
+
+		this.log('OUTPUT: ' + response + ' (' + Math.abs(end_time - start_time) + 'ms)');
 
 		return response;
 	};
@@ -375,7 +379,8 @@ var Surly = function() {
 					break;
 				// case 'pattern':
 				case 'person':
-					output += 'Dude';
+					var text = this.getTemplateText(children[i]);
+					output += subs.swap(text, 'person');
 					break;
 				case 'think':
 					// Parse template but don't output results
@@ -599,6 +604,8 @@ var Surly = function() {
 	this.isStringEmpty = function(input) {
 		return input.trim() === '';
 	};
+
+	this.debug('========================== BOOTING ============================');
 
 };
 
