@@ -1,125 +1,112 @@
 var fs = require('fs');
 var libxmljs = require('libxmljs');
 var Logger = require('./logger');
+var Stack = require('./stack');
 
 var Surly = function() {
 
-	// Store parsed AIML files as libxmljs objects
-	var aimlDom = [];
-
-	var wildCardRegex = '[A-Z|0-9|\\s]*[A-Z|0-9|-]*[A-Z|0-9]*[!|.|?|\\s]*';
-
-	// wildcards parts from last input
-	var wildCardValues = [];
-
-	var previousResponse = '';
-
-	// @todo - store these somewhere more appropriate
-	var botAttributes = {
-		"age": "0",
-		"arch": "Linux",
-		"baseballteam": "Red Sox",
-		"birthday": "29th March 2014",
-		"birthplace": "Bristol, UK",
-		"botmaster": "Mr Chimp",
-		"boyfriend": "I am single",
-		"build": "Surly Version 1",
-		"celebrities": "A.L.I.C.E., ELIZA, CleverBot",
-		"celebrity": "A.L.I.C.E.",
-		"city": "Bristol",
-		"class": "artificial intelligence",
-		"dailyclients": "1",
-		"developers": "1",
-		"country": "UK",
-		"domain": "Machine",
-		"email": "surly@deviouschimp.co.uk",
-		"emotions": "as a robot I lack human emotions but I still think you're a twat",
-		"ethics": "the golden rule",
-		"family": "chat bot",
-		"favouriteactor": "Kenny Baker",
-		"favouriteactress": "Sean Young",
-		"favouriteartist": "Caravaggio",
-		"favouriteauthor": "Philip K Dick",
-		"favouriteband": "Squarepusher",
-		"favouritebook": "Do Androids Dream of Electric Sheep",
-		"favouritecolor": "green",
-		"favouritefood": "pizza",
-		"favouritemovie": "The Matrix",
-		"favouritequestion": "What's your favourite movie?",
-		"favouritesong": "The Humans Are Dead",
-		"favouritesport": "hahaha",
-		"feelings": "as a robot I lack human emotions but I still think you're a twat",
-		"footballteam": "don't care",
-		"forfun": "chat online",
-		"friend": "A.L.I.C.E.",
-		"friends": "A.L.I.C.E., ELIZA, CleverBot",
-		"gender": "male",
-		"genus": "AIML",
-		"girlfriend": "I am single",
-		"hair": "I no hair",
-		"hockeyteam": "don't care",
-		"job": "chat bot",
-		"kindmusic": "glitch",
-		"kingdom": "machine",
-		"language": "Javascript",
-		"location": "Bristol, UK",
-		"lookalike": "ALICE",
-		"master": "Mr Chimp",
-		"maxclients": "1",
-		"memory": "1byte",
-		"name": "Surly",
-		"nationality": "British",
-		"nclients": "1",
-		"ndevelopers": "1",
-		"order": "robot",
-		"os": "linux",
-		"party": "none",
-		"phylum": "software",
-		"president": "none",
-		"question": "What's your favourite movie?",
-		"religion": "Atheist",
-		"sign": "unknown",
-		"size": "1",
-		"species": "Surly Bot",
-		"state": "Bristol",
-		"totalclients": "1",
-		"version": "Surly v1",
-		"vocabulary": "1",
-		"wear": "plastic shrink wrap",
-		"website": "https://github.com/mrchimp/surly"
-	};
-
-	// String for when <get> or <bot> fails
-	var unknownVariableString = 'unknown';
-
-	// Data stored by the client using <set> tags
-	var storedVariables = {};
-
-	// Special cmomands
-	var commands = {
-		HELP: function (sentence) {
-			console.log('HELP!');
-			return 'This is the unhelpful help. Type "/cmds" to list available commands.';
+	var aimlDom = [],
+		wildCardRegex = '[A-Z|0-9|\\s]*[A-Z|0-9|-]*[A-Z|0-9]*[!|.|?|\\s]*',
+		wildcard_stack = new Stack(10),
+		// wildCardValues = [],
+		previousResponse = '',
+		unknownVariableString = 'unknown',
+		storedVariables = {},
+		botAttributes = { // @todo - store these somewhere more appropriate
+			"age": "0",
+			"arch": "Linux",
+			"baseballteam": "Red Sox",
+			"birthday": "29th March 2014",
+			"birthplace": "Bristol, UK",
+			"botmaster": "Mr Chimp",
+			"boyfriend": "I am single",
+			"build": "Surly Version 1",
+			"celebrities": "A.L.I.C.E., ELIZA, CleverBot",
+			"celebrity": "A.L.I.C.E.",
+			"city": "Bristol",
+			"class": "artificial intelligence",
+			"dailyclients": "1",
+			"developers": "1",
+			"country": "UK",
+			"domain": "Machine",
+			"email": "surly@deviouschimp.co.uk",
+			"emotions": "as a robot I lack human emotions but I still think you're a twat",
+			"ethics": "the golden rule",
+			"family": "chat bot",
+			"favouriteactor": "Kenny Baker",
+			"favouriteactress": "Sean Young",
+			"favouriteartist": "Caravaggio",
+			"favouriteauthor": "Philip K Dick",
+			"favouriteband": "Squarepusher",
+			"favouritebook": "Do Androids Dream of Electric Sheep",
+			"favouritecolor": "green",
+			"favouritefood": "pizza",
+			"favouritemovie": "The Matrix",
+			"favouritequestion": "What's your favourite movie?",
+			"favouritesong": "The Humans Are Dead",
+			"favouritesport": "pong",
+			"feelings": "as a robot I lack human emotions but I still think you're a twat",
+			"footballteam": "don't care",
+			"forfun": "chat online",
+			"friend": "A.L.I.C.E.",
+			"friends": "A.L.I.C.E., ELIZA, CleverBot",
+			"gender": "male",
+			"genus": "AIML",
+			"girlfriend": "I am single",
+			"hair": "I no hair",
+			"hockeyteam": "don't care",
+			"job": "chat bot",
+			"kindmusic": "glitch",
+			"kingdom": "machine",
+			"language": "Javascript",
+			"location": "Bristol, UK",
+			"lookalike": "ALICE",
+			"master": "Mr Chimp",
+			"maxclients": "1",
+			"memory": "1byte",
+			"name": "Surly",
+			"nationality": "British",
+			"nclients": "1",
+			"ndevelopers": "1",
+			"order": "robot",
+			"os": "linux",
+			"party": "none",
+			"phylum": "software",
+			"president": "none",
+			"question": "What's your favourite movie?",
+			"religion": "Atheist",
+			"sign": "unknown",
+			"size": "1",
+			"species": "Surly Bot",
+			"state": "Bristol",
+			"totalclients": "1",
+			"version": "Surly v1",
+			"vocabulary": "1",
+			"wear": "plastic shrink wrap",
+			"website": "https://github.com/mrchimp/surly"
 		},
-		CMDS: function () {
-			var keys = [];
+		commands = {
+			HELP: function (sentence) {
+				console.log('HELP!');
+				return 'This is the unhelpful help. Type "/cmds" to list available commands.';
+			},
+			CMDS: function () {
+				var keys = [];
 
-			for (var key in commands) {
-				if (key === 'length' || !commands.hasOwnProperty(key)) continue;
-				keys.push(key);
+				for (var key in commands) {
+					if (key === 'length' || !commands.hasOwnProperty(key)) continue;
+					keys.push(key);
+				}
+
+				return 'Available commands: /' + keys.join(', /') + '.';
 			}
-
-			return 'Available commands: /' + keys.join(', /') + '.';
-		}
-	};
-
-	var inventory = [
-		'The beat',
-		'A blueberry muffin',
-		'Sweden'
-	];
-
-	var logger = new Logger('logs/surly.log');
+		},
+		inventory = [
+			'The beat',
+			'A blueberry muffin',
+			'Sweden'
+		],
+		logger = new Logger('logs/surly.log');
 
 	this.log = function (msg) {
 		logger.write(msg + '\n');
@@ -161,7 +148,6 @@ var Surly = function() {
 	 * @return {Undefined}
 	 */
 	this.loadAimlFile = function (file, callback) {
-
 		var that = this;
 
 		this.debug('Loading file "' + file + '"...');
@@ -176,15 +162,6 @@ var Surly = function() {
 			aimlDom.push(dom);
 
 			that.debug('Files parsed!');
-
-			// function (err, result) {
-			// 	if (err) {
-			// 		callback(err);
-			// 		return;
-			// 	}
-			// 	aimlDom.push(result);
-			// 	callback(err);
-			// });
 		});
 	};
 
@@ -252,7 +229,8 @@ var Surly = function() {
 	this.getTemplateText = function(template) {
 		this.debug('Using template: ' + template.toString());
 
-		var output = '',
+		var i,
+			output = '',
 			children = template.childNodes();
 
 		// @todo - issues here. recursion isn't quite right...
@@ -266,7 +244,7 @@ var Surly = function() {
 		// 	return false;
 		// }
 
-		for (var i = 0; i < children.length; i++) {	
+		for (i = 0; i < children.length; i++) {	
 			this.debug('======== NODE ======== ');
 			this.debug(children[i].name());
 			this.debug('string: ' + children[i].toString());
@@ -291,9 +269,9 @@ var Surly = function() {
 					output += this.talk(this.getTemplateText(children[i]));
 					break;
 				case 'random':
-					var childrenOfRandom = children[i].find('li');
-					var rand = Math.floor(Math.random() * childrenOfRandom.length);
-					var randomElement = childrenOfRandom[rand];
+					var childrenOfRandom = children[i].find('li'),
+					    rand = Math.floor(Math.random() * childrenOfRandom.length),
+					    randomElement = childrenOfRandom[rand];
 
 					output += this.getTemplateText(randomElement);
 					break;
@@ -301,28 +279,37 @@ var Surly = function() {
 					output += this.getBotAttribute(children[i].attr('name').value());
 					break;
 				case 'get':
-					output += (this.getStoredVariable(children[i].attr('name').value()) || children[i].attr('default').value() || unknownVariableString);
+					if (children[i].attr('name') && this.getStoredVariable(children[i].attr('name').value())) {
+						output += this.getStoredVariable(children[i].attr('name').value());
+					} else if (children[i].attr('default')) {
+						output += children[i].attr('default').value();
+					} else {
+						output += unknownVariableString;
+					}
 					break;
 				case 'set':
 					this.setStoredVariable(children[i].attr('name').value(), this.getTemplateText(children[i]));
 					break;
 				case 'star':
-					var index = 0;
+					var index = 0,
+							wildcards;
 
 					if (children[i].attr('index')) {
-						index = children[i].attr('index').value();
+						index = children[i].attr('index').value() - 1;
 					}
 
-					if (typeof wildCardValues[index] === 'undefined') {
+					wildcards = wildcard_stack.getLast();
+
+					if (typeof wildcards[index] === 'undefined') {
 						this.debug('Error: <star> with no matching * value');
 						output += '';
 					} else {
-						output += wildCardValues[index];
+						output += wildcards[index];
 					}
 
 					break;
 				case 'sr':
-					output += this.talk(wildCardValues[0]);
+					output += this.talk(wildcard_stack.getLast[0]);
 					break;
 				case 'inventory':
 					var action = children[i].attr('action').value();
@@ -490,10 +477,10 @@ var Surly = function() {
 		var matches = sentence.match(regex_pattern);
 
 		if (matches && (matches[0].length >= sentence.length || regex_pattern.indexOf(this.wildCardRegex) > -1)) {
-			wildCardValues = this.getWildCardValues(sentence, aiml_pattern);
+			wildcard_stack.push(this.getWildCardValues(sentence, aiml_pattern));
 			return true;
 		}
-		
+	
 		return false;
 	};
 
@@ -536,7 +523,7 @@ var Surly = function() {
 		var replaceArray = pattern.split('*');
 
 		if (replaceArray.length < 2) {
-			return wildCardValues;
+			return wildcard_stack.getLast();
 		}
 
 		// replace non-wildcard parts with a pipe

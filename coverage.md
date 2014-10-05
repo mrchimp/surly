@@ -48,5 +48,9 @@ AIML Coverage
   * ✘ Learn
 * External Processor
   * ✘ System
+
+Won't Implement
+===============
+
   * ✘ Javascript (this will NOT be implemented)
 

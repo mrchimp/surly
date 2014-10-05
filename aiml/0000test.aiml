@@ -2,6 +2,11 @@
 <aiml>
 
   <category>
+    <pattern>HELLO</pattern>
+    <template>Hi!</template>
+  </category>
+
+  <category>
     <pattern>TEST</pattern>
     <template>Success!</template>
   </category>
@@ -10,11 +15,11 @@
     <pattern>RANDOM</pattern>
     <template>
       <random>
-        <li>badger</li>
-        <li>shenanigans</li>
-        <li>perriwinkle</li>
-        <li>slalom</li>
-        <li>schnapps</li>
+        <li>Badger</li>
+        <li>Shenanigans</li>
+        <li>Perriwinkle</li>
+        <li>Slalom</li>
+        <li>Schnapps</li>
       </random>
     </template>
   </category>
@@ -23,6 +28,12 @@
     <pattern>SR *</pattern>
     <template><sr /></template>
   </category>
+
+  <category>
+    <pattern>TWOSTAR * AND *</pattern>
+    <template>Two things: <star index="1" /> and <star index="2" /></template>
+  </category>
+
 
   <category>
       <pattern>WHY</pattern>
