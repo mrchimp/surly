@@ -378,6 +378,14 @@ var Surly = function() {
 					output += this.getTemplateText(children[i]);
 					break;
 				// case 'pattern':
+				case 'gender':
+					var text = this.getTemplateText(children[i]);
+					output += subs.swap(text, 'gender');
+					break;
+				case 'person2':
+					var text = this.getTemplateText(children[i]);
+					output += subs.swap(text, 'person2');
+					break;
 				case 'person':
 					var text = this.getTemplateText(children[i]);
 					output += subs.swap(text, 'person');
