@@ -259,7 +259,7 @@ var Surly = function() {
 		// }
 
 		for (i = 0; i < children.length; i++) {
-			switch (children[i].name()) {
+			switch (children[i].name().toLowerCase()) {
 				case 'template':
 					output += this.getTemplateText(children[i]);
 					break;
