@@ -11,8 +11,10 @@
     "type": "git",
     "url": "https://github.com/mrchimp/surly"
   },
+  "main": "src/surly.js",
   "scripts": {
-    "start": "node server.js"
+    "server": "node server.js",
+    "cli": "node cli.js"
   },
   "dependencies": {
     "express": "",
