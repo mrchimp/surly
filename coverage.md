@@ -20,7 +20,7 @@ AIML Coverage
   * ✔ Bot
 * Shortcuts
   * ✔ Sr
-  * ✘ Person
+  * ✔ Person
   * ✘ Person2
   * ✘ Gender
 * System
