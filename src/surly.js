@@ -8,6 +8,7 @@ var Surly = function() {
 	var aimlDom = [],
 		wildCardRegex = '[A-Z|0-9|\\s]*[A-Z|0-9|-]*[A-Z|0-9]*[!|.|?|\\s]*',
 		wildcard_stack = new Stack(10),
+		input_stack = new Stack(10),
 		// wildCardValues = [],
 		previousResponse = '',
 		unknownVariableString = 'unknown',
@@ -180,7 +181,7 @@ var Surly = function() {
 		this.debug('========================');
 		this.debug('User input: ' + sentence);
 
-		sentence = sentence;
+		input_stack.push(sentence);
 
 		// Sentences beginning with / are commands
 		if (sentence.substr(0,1) === '/') {
@@ -368,6 +369,11 @@ var Surly = function() {
 				case 'think':
 					// Parse template but don't output results
 					this.getTemplateText(children[i]); 
+					break;
+				case 'input':
+					var input = 1;
+					children[i].attr('index').value()
+					output += input_stack.get(-input);
 					break;
 				default:
 					//return resolveChildren(children);

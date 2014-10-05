@@ -30,6 +30,11 @@
   </category>
 
   <category>
+    <pattern>REPEAT *</pattern>
+    <template>You just said "<input index="1" />".</template>
+  </category>
+
+  <category>
     <pattern>DO YOU?</pattern>
     <that>YEAH, * IS ALRIGHT, I GUESS.</that>
     <template>No, <thatstar /> sucks.</template>

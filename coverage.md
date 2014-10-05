@@ -11,8 +11,8 @@ AIML Coverage
 * Template
   * ✔ Star
   * ✔ That
-  * ✘ Input
-  * ✘ Thatstar
+  * ✔ Input
+  * ✔ Thatstar
   * ✘ Topicstar
   * ✔ Get
   * ✔ Bot
