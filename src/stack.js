@@ -41,8 +41,8 @@ var Stack = function(max_size) {
    */
   function get(index) {
     if (index < 1) {
-      var item = arr.slice(index);
-      
+      var item = arr.slice(index)[0];
+
       return item || false;
     }
 

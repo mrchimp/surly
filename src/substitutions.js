@@ -25,14 +25,14 @@
 			'myself': 'himself',
 
 			// third to first (masculine)
-			'i': 'he',
-			'me': 'him',
-			'mine': 'his',
-			'myself': 'himself',
+			'he': 'i',
+			'him': 'me',
+			'his': 'mine',
+			'himself': 'myself',
 
 			// third to first (feminine)
 			'she': 'I',
-			'i': 'me',
+			'her': 'me',
 			'hers': 'mine',
 			'herself': 'myself'
 		},

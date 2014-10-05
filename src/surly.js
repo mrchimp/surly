@@ -8,7 +8,7 @@ var pkg = require('../package.json');
 var Surly = function() {
 
 	var aimlDom = [],
-		wildCardRegex = '[A-Z|0-9|\\s]*[A-Z|0-9|-]*[A-Z|0-9]*[!|.|?|\\s]*',
+		wildCardRegex = ' ([A-Z|0-9|\\s]*[A-Z|0-9|-]*[A-Z|0-9]*[!|.|?|\\s]*)',
 		wildcard_stack = new Stack(10),
 		input_stack = new Stack(10),
 		// wildCardValues = [],
@@ -203,7 +203,7 @@ var Surly = function() {
 		}
 
 		for (i = 0; i < aimlDom.length; i++) {
- 			template = this.findTemplate(sentence, aimlDom[i].find('category'));
+			template = this.findTemplate(sentence, aimlDom[i].find('category'));
 
 			if (template) {
 				break;
@@ -265,6 +265,7 @@ var Surly = function() {
 		// }
 
 		for (i = 0; i < children.length; i++) {
+				
 			switch (children[i].name().toLowerCase()) {
 				case 'template':
 					output += this.getTemplateText(children[i]);
@@ -286,8 +287,8 @@ var Surly = function() {
 					break;
 				case 'random':
 					var childrenOfRandom = children[i].find('li'),
-					    rand = Math.floor(Math.random() * childrenOfRandom.length),
-					    randomElement = childrenOfRandom[rand];
+							rand = Math.floor(Math.random() * childrenOfRandom.length),
+							randomElement = childrenOfRandom[rand];
 
 					output += this.getTemplateText(randomElement);
 					break;
@@ -379,16 +380,17 @@ var Surly = function() {
 					break;
 				// case 'pattern':
 				case 'gender':
-					var text = this.getTemplateText(children[i]);
-					output += subs.swap(text, 'gender');
-					break;
 				case 'person2':
-					var text = this.getTemplateText(children[i]);
-					output += subs.swap(text, 'person2');
-					break;
 				case 'person':
-					var text = this.getTemplateText(children[i]);
-					output += subs.swap(text, 'person');
+					var text = this.getTemplateText(children[i]),
+							set = children[i].name().toLowerCase();
+
+					if (!text) {
+						text = wildcard_stack.get(-1)[0];
+					}
+					
+					output += subs.swap(text, set);
+
 					break;
 				case 'formal':
 					var text = this.getTemplateText(children[i]);
@@ -558,7 +560,7 @@ var Surly = function() {
 	 */
 	this.aimlPatternToRegex = function (pattern) {
 		var lastChar,
-		    firstChar = pattern.charAt(0);
+				firstChar = pattern.charAt(0);
 
 		// add spaces to prevent e.g. foo matching food
 		if (firstChar != '*') {
