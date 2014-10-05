@@ -21,8 +21,8 @@ AIML Coverage
 * Shortcuts
   * ✔ Sr
   * ✔ Person
-  * ✘ Person2
-  * ✘ Gender
+  * ✔ Person2
+  * ✔ Gender
 * System
   * ✔ Date
   * ✔ Size
