@@ -244,6 +244,7 @@ var Surly = function() {
 		this.debug('Using template: ' + template.toString());
 
 		var i,
+			x,
 			output = '',
 			children = template.childNodes();
 
@@ -299,6 +300,16 @@ var Surly = function() {
 					break;
 				case 'set':
 					this.setStoredVariable(children[i].attr('name').value(), this.getTemplateText(children[i]));
+					break;
+				case 'size':
+					var size = 0;
+
+					for (x = 0; x < aimlDom.length; x++) {
+						size += aimlDom[x].find('category').length;
+					}
+
+					output += size;
+					
 					break;
 				case 'star':
 					var index = 0,

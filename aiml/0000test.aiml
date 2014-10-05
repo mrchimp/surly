@@ -12,6 +12,11 @@
   </category>
 
   <category>
+    <pattern>SIZE</pattern>
+    <template>I recognize <size /> sentences.</template>
+  </category>
+
+  <category>
     <pattern>WHAT IS THE DATE</pattern>
     <template><srai>DATE</srai></template>
   </category>
