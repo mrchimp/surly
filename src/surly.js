@@ -88,7 +88,6 @@ var Surly = function() {
 		},
 		commands = {
 			HELP: function (sentence) {
-				console.log('HELP!');
 				return 'This is the unhelpful help. Type "/cmds" to list available commands.';
 			},
 			CMDS: function () {
@@ -110,7 +109,7 @@ var Surly = function() {
 		logger = new Logger('logs/surly.log');
 
 	this.log = function (msg) {
-		logger.write(msg + '\n');
+		logger.write(msg);
 	};
 
 	/**
@@ -119,7 +118,7 @@ var Surly = function() {
 	 * @return {Undefined}
 	 */
 	this.debug = function (msg) {
-		this.log(msg);
+		this.log('DEBUG - ' + msg);
 	};
 
 	/**
@@ -178,8 +177,7 @@ var Surly = function() {
 			command = '',
 			response = '';
 
-		this.debug('========================');
-		this.debug('User input: ' + sentence);
+		this.log('INPUT: ' + sentence);
 
 		input_stack.push(sentence);
 
@@ -218,6 +216,8 @@ var Surly = function() {
 		}
 
 		previousResponse = this.normaliseTemplate(template);
+
+		this.log('OUTPUT: ' + response);
 
 		return response;
 	};
@@ -258,11 +258,7 @@ var Surly = function() {
 		// 	return false;
 		// }
 
-		for (i = 0; i < children.length; i++) {	
-			this.debug('======== NODE ======== ');
-			this.debug(children[i].name());
-			this.debug('string: ' + children[i].toString());
-
+		for (i = 0; i < children.length; i++) {
 			switch (children[i].name()) {
 				case 'template':
 					output += this.getTemplateText(children[i]);
@@ -401,11 +397,6 @@ var Surly = function() {
 	 * @return {[type]}      [description]
 	 */
 	this.getBotAttribute = function (name) {
-		this.debug('-- Attributes:');
-		this.debug(botAttributes.toString());
-		this.debug(botAttributes[name]);
-		this.debug(name);
-
 		if (typeof botAttributes[name] === undefined) {
 			return null;
 		}
@@ -447,8 +438,6 @@ var Surly = function() {
 	 * @return {Object}            XMLDom template element
 	 */
 	this.findTemplate = function (sentence, categories) {
-		this.debug('cats length: ' + categories.length);
-
 		for (var i = 0; i < categories.length; i++) {
 			var pattern = categories[i].find('pattern')[0].text();
 

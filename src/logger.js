@@ -15,7 +15,7 @@ var Logger = function (logfile) {
 	});
 
 	this.write = function (msg) {
-		stream.write(msg, 'utf8');
+		stream.write(msg + '\n', 'utf8');
 	}
 
 };
