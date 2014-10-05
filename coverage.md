@@ -41,9 +41,9 @@ AIML Coverage
 * Symbolic Reduction
   * ✔ SRAI
 * Transformationasl
-  * ✘ Person
-  * ✘ Person2
-  * ✘ Gender
+  * ✔ Person
+  * ✔ Person2
+  * ✔ Gender
 * Covert
   * ✔ Think
   * ✘ Learn
