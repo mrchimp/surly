@@ -119,7 +119,7 @@ var Surly = function() {
 	 * @return {Undefined}
 	 */
 	this.debug = function (msg) {
-		this.log('    -- ' + msg);
+		this.log(msg);
 	};
 
 	/**
