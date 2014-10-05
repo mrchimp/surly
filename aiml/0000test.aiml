@@ -18,12 +18,22 @@
 
   <category>
     <pattern>UPPERCASE *</pattern>
-    <template><uppercase>this should be uppercase</uppercase></template>
+    <template><uppercase><star /></uppercase></template>
   </category>
 
   <category>
     <pattern>LOWERCASE *</pattern>
-    <template><lowercase>this should be lowercase</lowercase></template>
+    <template><lowercase><star /></lowercase></template>
+  </category>
+
+  <category>
+    <pattern>FORMAL *</pattern>
+    <template><formal><star /></formal></template>
+  </category>
+
+  <category>
+    <pattern>SENTENCE *</pattern>
+    <template><sentence><star /></sentence></template>
   </category>
 
   <category>

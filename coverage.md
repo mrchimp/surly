@@ -30,8 +30,8 @@ AIML Coverage
 * Formatting
   * ✔ Uppercase
   * ✔ Lowercase
-  * ✘ Formal
-  * ✘ Sentence
+  * ✔ Formal
+  * ✔ Sentence
 * Conditional
   * ✘ Condition
   * ✔ Random

@@ -390,6 +390,15 @@ var Surly = function() {
 					var text = this.getTemplateText(children[i]);
 					output += subs.swap(text, 'person');
 					break;
+				case 'formal':
+					var text = this.getTemplateText(children[i]);
+
+					output += text.toLowerCase().replace(/(?:^|\s)\S/g, function(a) { return a.toUpperCase(); });
+					break;
+				case 'sentence':
+					var text = this.getTemplateText(children[i]).toLowerCase();
+					output += text[0].toUpperCase() + text.slice(1);
+					break;
 				case 'uppercase':
 					output += this.getTemplateText(children[i]).toUpperCase();
 					break;
