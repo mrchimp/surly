@@ -1,5 +1,6 @@
 var fs = require('fs');
 var libxmljs = require('libxmljs');
+var Logger = require('./logger');
 
 var Surly = function() {
 
@@ -23,7 +24,7 @@ var Surly = function() {
 		"botmaster": "Mr Chimp",
 		"boyfriend": "I am single",
 		"build": "Surly Version 1",
-		"celebrities": "A.L.I.C.E., ELIZA, CleveBot",
+		"celebrities": "A.L.I.C.E., ELIZA, CleverBot",
 		"celebrity": "A.L.I.C.E.",
 		"city": "Bristol",
 		"class": "artificial intelligence",
@@ -112,7 +113,11 @@ var Surly = function() {
 		}
 	};
 
+	var logger = new Logger('logs/surly.log');
 
+	this.log = function (msg) {
+		logger.write(msg + '\n');
+	};
 
 	/**
 	 * Output text to console with indents to make it stand out
@@ -120,7 +125,7 @@ var Surly = function() {
 	 * @return {Undefined}
 	 */
 	this.debug = function (msg) {
-		console.log('    -- ' + msg);
+		this.log('    -- ' + msg);
 	};
 
 	/**
@@ -241,9 +246,8 @@ var Surly = function() {
 	this.getTemplateText = function(template) {
 		this.debug('Using template: ' + template.toString());
 
-		var output = '';
-
-		var templateChildren = template.childNodes();
+		var output = '',
+			templateChildren = template.childNodes();
 
 		// @todo - issues here. recursion isn't quite right...
 		// if (typeof template === 'undefined') {

@@ -75,3 +75,11 @@ Directory Structure
     ├── package.json - Manages server-side (node/npm) dependencies.
     |
   	└── server.js - The "go" button.
+
+
+Things Surly should be able to reply to (an inconclusive list)
+==============================================================
+
+ * "What is NOUN?"
+
+ 

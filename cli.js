@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var sys = require('sys');
 var surly = require('./src/surly.js');
 
@@ -9,7 +11,7 @@ var aimlDir = __dirname + '/aiml';
 // interpreter.loadAimlFile(__dirname + '/aiml/0000test.aiml');
 interpreter.loadAimlDir(aimlDir);
 
-console.log('Type something. Type quit to quit.');
+console.log('## Type something. Type quit to quit. /help for help.##');
 
 stdin.addListener('data', function (d) {
 	var sentence = d.toString().substring(0, d.length - 1)
