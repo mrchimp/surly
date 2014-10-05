@@ -11,7 +11,7 @@ Surly is a node.js AIML interpreter.
 Project Status
 ==============
 
-Kind of works a bit.
+Kind of works a bit. See `coverage.md` for more info.
 
 
 Requirements
@@ -54,6 +54,8 @@ Directory Structure
     ├── frontend_src - Code that will be compiled into /public.
     |                  Create new frontend js/less/etc here.
     |
+    ├── logs - Box of magic. Do not touch. Do not git.
+    |
     ├── node_modules - Box of magic. Do not touch. Do not git.
     |
     ├── public - Files directly accessable to client via HTTP
@@ -80,7 +82,8 @@ Directory Structure
 Things Surly should be able to reply to (an inconclusive list)
 ==============================================================
 
- * "What is NOUN?"
+ * What is NOUN?
+ * NOUN is DEFINITION.
 
 
 Todo
