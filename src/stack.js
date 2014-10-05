@@ -40,6 +40,12 @@ var Stack = function(max_size) {
    * @return {Integer} 
    */
   function get(index) {
+    if (index < 1) {
+      var item = arr.slice(index);
+      
+      return item || false;
+    }
+
     if (typeof arr[index] === 'undefined') {
       return false;
     }

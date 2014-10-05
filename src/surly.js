@@ -216,10 +216,23 @@ var Surly = function() {
 			response = 'Fuck knows.';
 		}
 
-		previousResponse = response;
+		previousResponse = this.normaliseTemplate(template);
 
 		return response;
 	};
+
+	/**
+	 * Convert a XML type template to a pattern-style string
+	 * @param  {XML Object or String} text AIML Template
+	 * @return {[type]}      Normalised template
+	 */
+	this.normaliseTemplate = function (text) {
+		return text
+			.toString()
+			.replace(/<star ?\S*\/?>/gi, '*')
+			.replace(/<template>|<\/template>/gi, '')
+			.toUpperCase();
+	}
 
 	/**
 	 * Parse an AIML template and get the resulting text
@@ -331,7 +344,7 @@ var Surly = function() {
 					output += previousResponse;
 					break;
 				case 'thatstar':
-					var wildCards = wildcard_stack.get(-2),
+					var wildcards = wildcard_stack.get(-1)[0],
 						index = 0;
 
 					if (children[i].attr('index')) {
@@ -341,7 +354,7 @@ var Surly = function() {
 					if (!wildcards) {
 						this.debug('Error: <thatstar> with no matching * value.');
 					} else {
-						otuput += wildcards[index];
+						output += wildcards[index];
 					}
 
 					break;
@@ -462,8 +475,7 @@ var Surly = function() {
 			this.debug('Error: multiple <that>s. Using first.');
 		}
 
-		// @todo - this needs to be fuzzier
-		var isMatch = this.comparePattern(that[0].text(), previousResponse.toUpperCase());
+		return that[0].text() === previousResponse.toUpperCase();
 
 		return isMatch;
 	}

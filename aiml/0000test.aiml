@@ -31,7 +31,7 @@
 
   <category>
     <pattern>DO YOU?</pattern>
-    <that>YEAH, * IS ALRIGHT, I GUESS</that>
+    <that>YEAH, * IS ALRIGHT, I GUESS.</that>
     <template>No, <thatstar /> sucks.</template>
   </category>
 
