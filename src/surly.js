@@ -317,6 +317,9 @@ var Surly = function() {
 					}
 
 					break;
+				case 'date':
+					output += new Date().toISOString();
+					break;
 				case 'sr':
 					output += this.talk(wildcard_stack.getLast()[0]);
 					break;

@@ -24,7 +24,7 @@ AIML Coverage
   * ✘ Person2
   * ✘ Gender
 * System
-  * ✘ Date
+  * ✔ Date
   * ✘ Ideas
   * ✘ Size
   * ✘ Version
