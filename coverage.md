@@ -28,8 +28,8 @@ AIML Coverage
   * ✔ Size
   * ✔ Version
 * Formatting
-  * ✘ Uppercase
-  * ✘ Lowercase
+  * ✔ Uppercase
+  * ✔ Lowercase
   * ✘ Formal
   * ✘ Sentence
 * Conditional

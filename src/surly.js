@@ -390,6 +390,12 @@ var Surly = function() {
 					var text = this.getTemplateText(children[i]);
 					output += subs.swap(text, 'person');
 					break;
+				case 'uppercase':
+					output += this.getTemplateText(children[i]).toUpperCase();
+					break;
+				case 'lowercase':
+					output += this.getTemplateText(children[i]).toLowerCase();
+					break;
 				case 'think':
 					// Parse template but don't output results
 					this.getTemplateText(children[i]); 

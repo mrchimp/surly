@@ -17,6 +17,16 @@
   </category>
 
   <category>
+    <pattern>UPPERCASE *</pattern>
+    <template><uppercase>this should be uppercase</uppercase></template>
+  </category>
+
+  <category>
+    <pattern>LOWERCASE *</pattern>
+    <template><lowercase>this should be lowercase</lowercase></template>
+  </category>
+
+  <category>
     <pattern>PERSON *</pattern>
     <template><person><star /></person></template>
   </category>
