@@ -2,6 +2,7 @@ var fs = require('fs');
 var libxmljs = require('libxmljs');
 var Logger = require('./logger');
 var Stack = require('./stack');
+var pkg = require('../package.json');
 
 var Surly = function() {
 
@@ -309,7 +310,7 @@ var Surly = function() {
 					}
 
 					output += size;
-					
+
 					break;
 				case 'star':
 					var index = 0,
@@ -384,6 +385,9 @@ var Surly = function() {
 					var input = 1;
 					children[i].attr('index').value()
 					output += input_stack.get(-input);
+					break;
+				case 'version':
+					output += pkg.version;
 					break;
 				default:
 					//return resolveChildren(children);

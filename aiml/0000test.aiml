@@ -17,6 +17,11 @@
   </category>
 
   <category>
+    <pattern>VERSION</pattern>
+    <template><version /></template>
+  </category>
+
+  <category>
     <pattern>WHAT IS THE DATE</pattern>
     <template><srai>DATE</srai></template>
   </category>
