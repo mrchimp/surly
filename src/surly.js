@@ -302,7 +302,6 @@ var Surly = function() {
 
 					if (typeof wildcards[index] === 'undefined') {
 						this.debug('Error: <star> with no matching * value');
-						output += '';
 					} else {
 						output += wildcards[index];
 					}
@@ -330,6 +329,21 @@ var Surly = function() {
 					break;
 				case 'that':
 					output += previousResponse;
+					break;
+				case 'thatstar':
+					var wildCards = wildcard_stack.get(-2),
+						index = 0;
+
+					if (children[i].attr('index')) {
+						index = children[i].attr('index').value() - 1;
+					}
+
+					if (!wildcards) {
+						this.debug('Error: <thatstar> with no matching * value.');
+					} else {
+						otuput += wildcards[index];
+					}
+
 					break;
 				case 'li':
 					output += this.getTemplateText(children[i]);

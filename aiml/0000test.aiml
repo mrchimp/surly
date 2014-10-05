@@ -25,6 +25,17 @@
   </category>
   
   <category>
+    <pattern>I LIKE *</pattern>
+    <template>Yeah, <star /> is alright, I guess.</template>
+  </category>
+
+  <category>
+    <pattern>DO YOU?</pattern>
+    <that>YEAH, * IS ALRIGHT, I GUESS</that>
+    <template>No, <thatstar /> sucks.</template>
+  </category>
+
+  <category>
     <pattern>SR *</pattern>
     <template><sr /></template>
   </category>
@@ -33,7 +44,6 @@
     <pattern>TWOSTAR * AND *</pattern>
     <template>Two things: <star index="1" /> and <star index="2" /></template>
   </category>
-
 
   <category>
       <pattern>WHY</pattern>
