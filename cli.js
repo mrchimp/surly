@@ -2,15 +2,40 @@
 
 var sys = require('sys');
 var surly = require('./src/surly.js');
+var pkg = require('./package.json');
+var conf = require('rc')('surly', {
+    brain: '',      b: '',
+    help: false,
+    version: false
+});
+
+var options = {
+    brain: conf.b || conf.brain || __dirname + '/aiml',
+    help: conf.help || conf.h,
+    version: conf.version,
+};
+
+if (options.help) {
+    console.log('Surly chat bot command line interface\n\n' + 
+        'Options: \n' + 
+        '  -b, --brain       AIML directory (./aiml)\n' + 
+        '  --help            Show this help message\n' + 
+        '  --version         Show version number');
+    process.exit();
+}
+
+if (options.version) {
+    console.log(pkg.version);
+    process.exit();
+}
 
 var stdin = process.openStdin();
 var sentence = '';
-var interpreter = new surly();
-var aimlDir = __dirname + '/aiml';
+var bot = new surly();
 var prompt = 'You: ';
 
-// interpreter.loadAimlFile(__dirname + '/aiml/0000test.aiml');
-interpreter.loadAimlDir(aimlDir);
+// bot.loadAimlFile(__dirname + '/aiml/0000test.aiml');
+bot.loadAimlDir(options.brain);
 
 console.log('Surly: Hello! Type quit to quit or /help for unhelpful help.');
 
@@ -24,6 +49,6 @@ stdin.addListener('data', function (d) {
 		process.exit(0);
 	}
 
-	console.log('Surly: ' + interpreter.talk(sentence).trim());
+	console.log('Surly: ' + bot.talk(sentence).trim());
 	process.stdout.write(prompt);
 });

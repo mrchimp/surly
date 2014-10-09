@@ -17,11 +17,13 @@
     "cli": "node cli.js"
   },
   "dependencies": {
-    "express": "",
-    "socket.io": "",
-    "ent": "~0.1.0",
     "ejs": "*",
-    "libxmljs": "~0.8.1"
+    "ent": "~0.1.0",
+    "express": "",
+    "libxmljs": "~0.8.1",
+    "rc": "^0.5.1",
+    "simple-xmpp": "^0.1.92",
+    "socket.io": ""
   },
   "devDependencies": {
     "bower": "",
