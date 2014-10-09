@@ -1,16 +1,5 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <aiml>
-
-  <category>
-    <pattern>HELLO</pattern>
-    <template>Hi!</template>
-  </category>
-
-  <category>
-    <pattern>DATE</pattern>
-    <template><date /></template>
-  </category>
-
   <category>
     <pattern>UPPERCASE *</pattern>
     <template><uppercase><star /></uppercase></template>
@@ -72,11 +61,6 @@
   </category>
 
   <category>
-    <pattern>WHAT IS THE DATE</pattern>
-    <template><srai>DATE</srai></template>
-  </category>
-
-  <category>
     <pattern>TEST</pattern>
     <template>Success!</template>
   </category>
@@ -132,23 +116,8 @@
   </category>
 
   <category>
-      <pattern>MY NAME IS *</pattern>
-      <template>Hello, <star /><set name="name"><star /></set></template>
-  </category>
-
-  <category>
       <pattern>WHAT'S *</pattern>
       <template><srai>WHAT IS <star /></srai></template>
-  </category>
-
-  <category>
-    <pattern>WHAT IS YOUR NAME?</pattern>
-    <template>My name is <bot name="name" />.</template>
-  </category>
-
-  <category>
-    <pattern>WHAT IS MY NAME?</pattern>
-    <template>You are <get name="name" />.</template>
   </category>
 
   <category>
@@ -174,25 +143,5 @@
   <category>
     <pattern>GET FOO</pattern>
     <template>Foo is: <get name="foo"></get></template>
-  </category>
-
-  <category>
-    <pattern>URL</pattern>
-    <template>My website is <bot name="website" /></template>
-  </category>
-
-  <category>
-    <pattern>TAKE *</pattern>
-    <template>
-      <think>
-        <inventory action="swap"><star /></inventory>
-      </think>
-      Okay, took <star /> and dropped <get name="last_dropped" default="nothing"></get>
-    </template>
-  </category>
-
-  <category>
-    <pattern>INVENTORY</pattern>
-    <template><inventory action="list" /></template>
   </category>
 </aiml>

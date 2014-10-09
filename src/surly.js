@@ -137,7 +137,7 @@ var Surly = function() {
 
 			if (fs.statSync(name).isDirectory()) {
 				console.log('ignoring directory: ' + name);
-			} else {
+			} else if (name.substr(-5).toLowerCase() === '.aiml') {
 				this.loadAimlFile(name, callback);
 			}
 		}

@@ -48,7 +48,6 @@ if (options.version) {
 var bot = new surly();
 bot.loadAimlDir(options.brain);
 
-
 xmpp.on('online', function(data) {
     if (options.addcontact) {
         xmpp.subscribe(options.addcontact);
@@ -85,7 +84,6 @@ xmpp.on('subscribe', function(from) {
     console.log('got subscribe request from ' + from);
     // xmpp.acceptSubscription(from);
 });
-
 
 console.log('Connecting to ' + options.username + '@' + options.host + ':' + options.port + ' (' + (options.password ? 'password' : 'no password') + ')...');
 

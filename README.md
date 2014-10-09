@@ -55,7 +55,7 @@ Run as XMPP client
 Config
 ======
 
-Config files and read by `rc`. Any flag shown in `--help` can be set in the options file.
+Config files are found and read by `rc`. Any flag shown in `--help` can be set in the options file.
 
 
 Directory Structure
