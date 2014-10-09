@@ -39,10 +39,23 @@ Run a web server
  1. `$ sudo node server.js`
  2. Obey on-screen instructions.
 
+
 Use in the terminal
 -------------------
 
  1. `$ node cli.js`
+
+
+Run as XMPP client
+------------------
+
+ 1. `$ node xmpp.js`
+
+
+Config
+======
+
+Config files and read by `rc`. Any flag shown in `--help` can be set in the options file.
 
 
 Directory Structure
@@ -66,17 +79,23 @@ Directory Structure
     |    └── js - js files end up here. You probably don't want 
     |             to create files here directly.
     |
-    ├── routes - Map URLs to functions
+    ├── routes - Map URLs to functions.
+    |
+    ├── src - The meat and potatoes.
     |
     ├── views - Template file - [EJS format](http://embeddedjs.com/)
     |
-    ├── Gruntfile.js - Configure how project is compiled
+    ├── cli.js - Run Surly in the terminal.
     |
-    ├── bower.json - Manage frontend dependencies
+    ├── bower.json - Manage frontend dependencies.
+    |
+    ├── Gruntfile.js - Configure how project is compiled.
     |
     ├── package.json - Manages server-side (node/npm) dependencies.
     |
-  	└── server.js - The "go" button.
+    ├── server.js - Run Surly as a web server.
+    |
+  	└── xmpp.js - Run Surly as a XMPP server.
 
 
 Things Surly should be able to reply to (an inconclusive list)
