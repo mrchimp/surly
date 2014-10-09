@@ -36,20 +36,20 @@ Usage
 Run a web server
 ----------------
 
- 1. `$ sudo node server.js`
+ 1. `sudo node server.js`
  2. Obey on-screen instructions.
 
 
 Use in the terminal
 -------------------
 
- 1. `$ node cli.js`
+`node cli.js`
 
 
 Run as XMPP client
 ------------------
 
- 1. `$ node xmpp.js`
+`node xmpp.js`
 
 
 Config
@@ -67,7 +67,7 @@ Directory Structure
     ├── frontend_src - Code that will be compiled into /public.
     |                  Create new frontend js/less/etc here.
     |
-    ├── logs - Box of magic. Do not touch. Do not git.
+    ├── logs - Chat logs.
     |
     ├── node_modules - Box of magic. Do not touch. Do not git.
     |
