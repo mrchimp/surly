@@ -8,7 +8,7 @@ var fs = require('fs');
 var path = require('path');
 var routes = require('./routes');
 var talk = require('./routes/talk');
-var surly = require('./src/surly.js');
+var surly = require('./src/surly');
 
 var aimlDir = __dirname + '/aiml';
 var app = express();

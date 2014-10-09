@@ -11,7 +11,6 @@ var Surly = function() {
 		wildCardRegex = ' ([A-Z|0-9|\\s]*[A-Z|0-9|-]*[A-Z|0-9]*[!|.|?|\\s]*)',
 		wildcard_stack = new Stack(10),
 		input_stack = new Stack(10),
-		// wildCardValues = [],
 		previousResponse = '',
 		unknownVariableString = 'unknown',
 		storedVariables = {},
