@@ -9,12 +9,37 @@ var path = require('path');
 var routes = require('./routes');
 var talk = require('./routes/talk');
 var surly = require('./src/surly');
+var pkg = require('./package.json');
+var conf = require('rc')('surly', {
+    brain: '',      b: '',
+    help: false,
+    version: false
+});
 
-var aimlDir = __dirname + '/aiml';
+var options = {
+    brain: conf.b || conf.brain || __dirname + '/aiml',
+    help: conf.help || conf.h,
+    version: conf.version,
+};
+
+if (options.help) {
+    console.log('Surly chat bot web server\n\n' + 
+        'Options: \n' + 
+        '  -b, --brain       AIML directory (./aiml)\n' + 
+        '  --help            Show this help message\n' + 
+        '  --version         Show version number');
+    process.exit();
+}
+
+if (options.version) {
+    console.log(pkg.version);
+    process.exit();
+}
+
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', options.port || process.env.PORT || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.use(express.favicon());
@@ -33,7 +58,7 @@ if ('development' == app.get('env')) {
 }
 
 interpreter = new surly();
-interpreter.loadAimlDir(aimlDir);
+interpreter.loadAimlDir(options.brain);
 
 // Set up routes
 app.get('/', routes.index);    // Gets the form

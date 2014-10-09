@@ -34,7 +34,6 @@ var sentence = '';
 var bot = new surly();
 var prompt = 'You: ';
 
-// bot.loadAimlFile(__dirname + '/aiml/0000test.aiml');
 bot.loadAimlDir(options.brain);
 
 console.log('Surly: Hello! Type quit to quit or /help for unhelpful help.');
