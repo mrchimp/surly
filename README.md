@@ -17,32 +17,64 @@ Kind of works a bit. See `coverage.md` for more info.
 Requirements
 ============
 
- * [Node.js](http://nodejs.org/)
- * [NPM](https://www.npmjs.org/)
+* [Node.js](http://nodejs.org/)
 
 
 Installation
 ============
 
- 1. Aquire code.
- 2. `npm install`
- 3. `bower install`
- 4. `grunt`
+1. Aquire code.
+2. `npm install`
+3. `bower install`
+4. `grunt`
 
 
 Usage
 =====
 
-Run a web server
-----------------
+There are three ways to use Surly.
 
- 1. `$ sudo node server.js`
- 2. Obey on-screen instructions.
+1. Talk to Surly in the terminal
 
-Use in the terminal
--------------------
+         node cli.js
 
- 1. `$ node cli.js`
+2. Run Surly as a web server
+
+         sudo node server.js
+
+3. Connect Surly to an XMPP chat server
+
+        node xmpp.js --username=surlybot@gmail.com --password=hunter2
+
+
+
+Help
+====
+
+Run `node server.js --help` for options. Any options here can be set in a config file. See below.
+
+
+Create a config file (optional)
+=====================
+
+If you're using Surly regularly, you'll probably want to set up some defaults. You can use any config format supported by [rc](https://www.npmjs.com/package/rc). For example:
+
+1. Create a config file.
+
+        ~/.surlyrc
+
+2. You can set defaults for any argument. See `xmpp --help` for a list of available arguments.
+
+        {
+            "username": "surlybot@gmail.com",
+            "password": "hunter2",
+            "host": "talk.google.com",
+            "port": "5222"
+        }
+
+3. Then just run it - no arguments!
+    
+        node xmpp.js
 
 
 Directory Structure
@@ -50,7 +82,7 @@ Directory Structure
 
     |
     ├── aiml - This is where the bot's brain goes.
-	|
+    |
     ├── frontend_src - Code that will be compiled into /public.
     |                  Create new frontend js/less/etc here.
     |
@@ -76,14 +108,14 @@ Directory Structure
     |
     ├── package.json - Manages server-side (node/npm) dependencies.
     |
-  	└── server.js - The "go" button.
+    └── server.js - The "go" button.
 
 
 Things Surly should be able to reply to (an inconclusive list)
 ==============================================================
 
- * What is NOUN?
- * NOUN is DEFINITION.
+* What is NOUN?
+* NOUN is DEFINITION.
 
 
 Todo
