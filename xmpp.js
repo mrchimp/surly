@@ -16,7 +16,7 @@ var conf = require('rc')('surly', {
 })
 
 var options = {
-    username: conf.u || conf.username || 'surly',
+    username: conf.u || conf.username || '',
     password: conf.p || conf.password || '',
     host: conf.h || conf.host || 'talk.google.com',
     port: conf.P || conf.port || 5222,
@@ -29,7 +29,7 @@ var options = {
 if (options.help) {
     console.log('Surly chat bot XMPP client\n\n' + 
         'Options: \n' + 
-        '  -u, --username    XMPP username (surly)\n' + 
+        '  -u, --username    XMPP username ()\n' + 
         '  -p, --password    XMPP password ()\n' + 
         '  -h, --host        XMPP host     (talk.google.com)\n' + 
         '  -P, --port        XMPP port     (5222)\n' + 
