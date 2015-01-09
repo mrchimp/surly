@@ -34,28 +34,6 @@ Usage
 
 There are three ways to use Surly.
 
-<<<<<<< HEAD
- 1. `sudo node server.js`
- 2. Obey on-screen instructions.
-
-
-Use in the terminal
--------------------
-
-`node cli.js`
-
-
-Run as XMPP client
-------------------
-
-`node xmpp.js`
-
-
-Config
-======
-
-Config files are found and read by `rc`. Any flag shown in `--help` can be set in the options file.
-=======
 1. Talk to Surly in the terminal
 
          node cli.js
