@@ -18,7 +18,7 @@ var options = {
 if (options.help) {
     console.log('Surly chat bot command line interface\n\n' + 
         'Options: \n' + 
-        '  -b, --brain       AIML directory (./aiml)\n' + 
+        '  -b, --brain       AIML directory (aiml/)\n' + 
         '  --help            Show this help message\n' + 
         '  --version         Show version number');
     process.exit();
