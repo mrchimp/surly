@@ -1,8 +1,14 @@
+
+DEPRECATED
+==========
+
+You probably want to use [Surly2](https://github.com/mrchimp/surly2) instead. It's incomplete but it's better and works on newer versions of Node.
+
 surly
 =====
 
  > **surly** *adjective*
- > 
+ >
  >  1. bad-tempered and unfriendly
 
 Surly is a node.js AIML interpreter.
@@ -73,7 +79,7 @@ If you're using Surly regularly, you'll probably want to set up some defaults. Y
         }
 
 3. Then just run it - no arguments!
-    
+
         node xmpp.js
 
 
@@ -92,10 +98,10 @@ Directory Structure
     |
     ├── public - Files directly accessable to client via HTTP
     |    |
-    |    ├── bower_components - Publicly available magic. 
+    |    ├── bower_components - Publicly available magic.
     |    |                      Do not touch, DO git.
     |    |
-    |    └── js - js files end up here. You probably don't want 
+    |    └── js - js files end up here. You probably don't want
     |             to create files here directly.
     |
     ├── routes - Map URLs to functions.
