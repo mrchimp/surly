@@ -20,7 +20,7 @@
     "ejs": "*",
     "ent": "~0.1.0",
     "express": "",
-    "libxmljs": "~0.8.1",
+    "libxmljs": "~0.14.1",
     "rc": "^0.5.1",
     "simple-xmpp": "^0.1.92",
     "socket.io": ""
